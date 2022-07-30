@@ -13,6 +13,7 @@ describe('4.5.0 - J11-001 - Clean Bild tests', () => {
   
   it('enter text into postanski broj field', () => {
     RegisterPage.enterAdresaUlice('Test1234')
+    //test
 
 })
 
