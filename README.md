@@ -1,2 +1,2 @@
-# Typequast
+# Typeqast
 Automation 
