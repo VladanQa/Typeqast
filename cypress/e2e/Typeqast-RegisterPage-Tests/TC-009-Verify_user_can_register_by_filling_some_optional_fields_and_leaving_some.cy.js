@@ -1,0 +1,31 @@
+/// <reference types="Cypress" />
+
+const random = Math.floor(Math.random() * 1000 + 1)
+
+import registerPage from "../Pages/registerPage";
+
+describe('Typeqast Automation Register Page', () => {
+
+    let RegisterPage = new registerPage()
+
+    before(() => {
+        cy.visit('https://www.links.hr/hr/register')
+        RegisterPage.ifAcceptCookieButtonAppearClickOnIt()
+        
+      })
+
+it('TC-009 - Verify user can register by filling in some optional fields and leaving some', () => {
+    RegisterPage.enterNameInMandatoryFieldIme('Ime:','Marko')
+                .enterLastNameInMandatoryFieldPrezime('Prezime:', 'Markovic')
+                .enterEmailInMandatoryFieldElektronskaposta('Elektronska pošta:', 'markomarkovic' + random + '@mailinator.com')
+                .enterStreetAddressInTheAdresaUliceField('Adresa ulice:','Takovska 101')
+                .assertZipPostalCodeFieldIsEmpty()
+                .enterPhoneNumberInTheTelefonField('Telefon:', '+123121234567')
+                .enterPasswordInMandatoryFieldLozinka('Lozinka:', '123456')
+                .enterConfirmPasswordInMandatoryFieldPotvrditelozinku('Potvrdite lozinku:', '123456')
+                .clickOnTheRegistrujSeButton()
+                .assertRegistrationMessageAfterClickingTheRegistrujSeButton('Poslan vam je e-mail koji sadrži upute za aktivaciju članstva.')
+
+})
+
+})
