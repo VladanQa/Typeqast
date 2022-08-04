@@ -14,19 +14,20 @@ describe('Typeqast Automation Register Page', () => {
         
       })
 
-it('TC-051 - Verify that "pravna osoba" is able to register with filing required fields "Detalji o tvrtki" form  but not filling all other required  fields', () => {
+it('TC-052 - Verify all fields by entering the data and validating at "Detalji o tvrtki" form ', () => {
     RegisterPage.checkRegisterAsCompanyCkeckbox()
                 .assertCompanyInfoHeaderIsVissibleAftreCheckinhTheCompanyInfoHeader('Detalji o tvrtki')
                 .enterCompanyNameInTheImetvrtkeField('Quality control')
                 .enterompanyOIBInTheOIBtvrtkeField('12345678901')
+                .enterEmailITheElektronskaPostaFieldAtCompanyForm('test234@ab.com')
+                .enterPhoneInTheEmailTvrtkeFieldAtCompanyForm('+123121234567')
+                .enterContactPersonInTheKontaktOsobaTvrtkeFieldAtCompanyForm('Pera Peric')
                 .enterCompanyAddressnTheAdresauliceField('Golubacka 25')
                 .enterPostalCodeAtCompanyForm('21 000')
                 .selectOptionWhenTyping('21 000 Novi Sad, Serbia')
     RegisterPage.assertCityFieldIsFilledAfterZipCodeSelectionAtCompanyForm('Novi Sad')
                 .assertCountryFieldIsFilledAfterZipCodeSelectionAtCompanyForm('85')
-                .clickOnTheRegistrujSeButton()
-                .assertValidationErrorExistOnMandatoryFieldAfterClickingRefisterButtonAtFirstNameField('Ime je potrebno')
-
+                
 
 })
 

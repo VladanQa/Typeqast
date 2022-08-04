@@ -49,9 +49,58 @@ export default class registerPage {
     companyZipCodeLabel = ('[for="CompanyZipPostalCode"]')
     companyCityLabel = ('[for="CompanyCity"]')
     companyInfoHeader = ('#companyInfo > .title')
-
-
+    companyCityHiden = ('#CompanyCity')
+    countryHidenFieldValue = ('#CompanyCountryId')
+    
     //METHODS
+    assertValidationErrorMessageAtCompanyFormOiB(labelName, errorMessage){
+        if(cy.get(this.labelAboveTheField).contains(labelName)){
+              cy.get(this.companyOIBField).siblings('span').should('have.class', 'field-validation-error')
+              .and('have.text', errorMessage)
+        }  
+        return this
+    }
+    as
+    clickOnTheImeTvrtkefield(){
+        cy.get(this.companyNameField)
+        .click()
+        return this
+    }
+    enterContactPersonInTheKontaktOsobaTvrtkeFieldAtCompanyForm(contactPerson){
+        cy.get(this.companyContactPersonField)
+        .clear()
+        .type(contactPerson)
+        .should('have.value', contactPerson)
+        return this
+    }
+    enterPhoneInTheEmailTvrtkeFieldAtCompanyForm(phone){
+        cy.get(this.companyPhoneField)
+        .clear()
+        .type(phone)
+        .should('have.value', phone)
+        return this
+    }
+    enterEmailITheElektronskaPostaFieldAtCompanyForm(email){
+        cy.get(this.companyEmailField)
+        .clear()
+        .type(email + '{enter}')
+        .should('have.value', email)
+        return this
+    }
+    assertCountryFieldIsFilledAfterZipCodeSelectionAtCompanyForm(value){
+        cy.get(this.countryHidenFieldValue).first()
+        .should('have.value', value )
+        return this
+      }
+    assertCityFieldIsFilledAfterZipCodeSelectionAtCompanyForm(cityName){ ////
+        cy.get(this.companyCityHiden)
+        .should('have.value', cityName)
+        return this
+      }
+    selectOptionWhenTyping(dropOption){
+        cy.get(this.dropdownAfterTypingValue).contains(dropOption)
+              .click()
+    }
     enterPostalCodeAtCompanyForm(zipcode){
         cy.get(this.companyZipCodeLabel)
         .siblings('input').eq(0)
@@ -86,7 +135,7 @@ export default class registerPage {
         .should('have.class', 'mandatory')
         return this
     }
-    assertValidationErrorMessageAtCompanyForm(labelName, email){
+    assertValidationErrorMessageAtCompanyForm(labelName){
         if(cy.get(this.labelAboveTheField).contains(labelName)){
               cy.get(this.companyNameField).siblings('span').should('have.class', 'field-validation-error')
         }  
