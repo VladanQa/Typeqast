@@ -11,4 +11,5 @@
 1. Open Cypress with: npx cypress open
 
 ## Run Them Tests
+Test in e2e folder
 1. npx cypress run
